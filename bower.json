@@ -2,7 +2,7 @@
   "name": "angular-schema-form-dynamic-select",
   "description": "Dynamic select add-on for angular schema form.",
   "main": [
-    "angular-schema-form-dynamic-select.js"
+    "angular-schema-form-dynamic-select.min.js"
   ],
   "version": "0.14.1",
   "authors": [
