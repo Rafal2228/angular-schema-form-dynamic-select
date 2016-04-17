@@ -142,7 +142,7 @@ angular.module('schemaForm').controller('dynamicSelectController', ['$scope', '$
     $scope.select_model = {};
 
     console.log("Setting options." + $scope.form.options.toString());
-    $scope.form.options.scope = $scope;
+    // $scope.form.options.scope = $scope;
 
     $scope.triggerTitleMap = function () {
         console.log("listener triggered");
@@ -181,9 +181,9 @@ angular.module('schemaForm').controller('dynamicSelectController', ['$scope', '$
 					//loop through the object/array
                     var newName = "";
 					for (var i in newOptions.map.nameProperty) {
-    					newName += current_row[newOptions .map.nameProperty[i]]; 
+    					newName += current_row[newOptions .map.nameProperty[i]];
     					if(i != final){newName += separator};
-					}	
+					}
                     current_row["name"] = newName; //init the 'name' property
 				}
                 else{
@@ -293,7 +293,14 @@ angular.module('schemaForm').controller('dynamicSelectController', ['$scope', '$
         else if (form.options.asyncCallback) {
             return $scope.getCallback(form.options.asyncCallback)(form.options, search).then(
                 function (_data) {
-                    $scope.finalizeTitleMap(form, _data.data, form.options);
+                    _data = _data.data;
+                    for (var prop in _data) {
+                      if (_data[prop].length) {
+                        _data = _data[prop];
+                        break;
+                      }
+                    }
+                    $scope.finalizeTitleMap(form, _data, form.options);
                     console.log('asyncCallback items', form.titleMap);
                 },
                 function (data, status) {
